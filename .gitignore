@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+.pytest_cache/
+
+# Data files (don't commit large datasets)
+data/images/*.jpg
+data/images/*.jpeg
+data/images/*.png
+data/images/*.bmp
+data/images/*.tiff
+data/images/*.JPG
+data/images/*.JPEG
+data/images/*.PNG
+
+# Keep the structure
+!data/images/README.md
+!data/annotations/README.md
+
+# Annotation exports (main file and backup)
+data/annotations_export.json
+data/annotations_export.backup.json
+
+# Progress files
+data/progress.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+*.log
+
+# Node (if you use any npm tools)
+node_modules/
+package-lock.json
+
+# Backup files
+*.backup.json
