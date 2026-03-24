@@ -13,9 +13,28 @@
             <h1>🪹 Bird Nest Plastic Annotation Tool</h1>
             <div class="header-info">
                 <span id="progress-text">Loading...</span>
-                <button id="export-btn" class="btn btn-secondary">Export Annotations</button>
             </div>
         </header>
+
+        <section class="auth-sheet-panel">
+            <div class="auth-controls">
+                <h2>Google Authentication</h2>
+                <p id="auth-status">Not connected</p>
+                <div class="auth-buttons">
+                    <button id="google-login-btn" class="btn btn-primary">Sign in with Google</button>
+                    <button id="google-logout-btn" class="btn btn-secondary">Sign out</button>
+                </div>
+            </div>
+
+            <div class="sheet-controls">
+                <h2>Google Sheet</h2>
+                <label for="sheet-url-input">Sheet URL or Spreadsheet ID</label>
+                <input id="sheet-url-input" type="text" placeholder="https://docs.google.com/spreadsheets/d/...">
+                <div class="auth-buttons">
+                    <button id="connect-sheet-btn" class="btn btn-primary">Connect Sheet</button>
+                </div>
+            </div>
+        </section>
 
         <!-- Main Content -->
         <main class="main-content">
@@ -27,7 +46,7 @@
                 </div>
                 
                 <div class="canvas-overlay" id="canvas-overlay">
-                    <p>👉 Enter a start index below and click "Start Annotation"</p>
+                    <p>Sign in, connect a sheet URL, then click Start Annotation</p>
                 </div>
 
                 <div class="instructions">
