@@ -11,6 +11,27 @@ BACKEND_PID=""
 FRONTEND_PID=""
 CLEANED_UP=0
 
+free_port() {
+  local port="$1"
+  local pids
+  pids="$(lsof -ti tcp:"$port" 2>/dev/null || true)"
+  if [ -n "$pids" ]; then
+    echo "Port $port is in use. Stopping existing process(es): $pids"
+    # shellcheck disable=SC2086
+    kill $pids 2>/dev/null || true
+    sleep 1
+
+    # If anything is still bound, force kill.
+    pids="$(lsof -ti tcp:"$port" 2>/dev/null || true)"
+    if [ -n "$pids" ]; then
+      echo "Force-stopping remaining process(es) on port $port: $pids"
+      # shellcheck disable=SC2086
+      kill -9 $pids 2>/dev/null || true
+      sleep 1
+    fi
+  fi
+}
+
 cleanup() {
   if [ "$CLEANED_UP" -eq 1 ]; then
     return
@@ -43,15 +64,8 @@ if [ ! -f "backend/.env" ]; then
   exit 1
 fi
 
-if lsof -ti tcp:"$BACKEND_PORT" >/dev/null 2>&1; then
-  echo "Port $BACKEND_PORT is already in use. Stop that process and try again."
-  exit 1
-fi
-
-if lsof -ti tcp:"$FRONTEND_PORT" >/dev/null 2>&1; then
-  echo "Port $FRONTEND_PORT is already in use. Stop that process and try again."
-  exit 1
-fi
+free_port "$BACKEND_PORT"
+free_port "$FRONTEND_PORT"
 
 echo "Starting backend on http://localhost:$BACKEND_PORT ..."
 (cd backend && python app.py) &
