@@ -25,7 +25,6 @@ Then edit `backend/.env` and set:
 GOOGLE_CLIENT_ID=...
 GOOGLE_CLIENT_SECRET=...
 GOOGLE_REDIRECT_URI=http://localhost:5001/api/auth/google-callback
-FLASK_SECRET_KEY=change-me
 FRONTEND_URL=http://localhost:8000
 CORS_ORIGINS=http://localhost:8000,http://127.0.0.1:8000,null
 ```
