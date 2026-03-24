@@ -1,38 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Bird Nest Plastic Annotation Tool - Startup Script
-# This script sets up and starts the annotation tool
+set -euo pipefail
 
-echo "🪹 Bird Nest Plastic Annotation Tool"
-echo "===================================="
-echo ""
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+cd "$ROOT_DIR"
 
-# Check if virtual environment exists
 if [ ! -d "venv" ]; then
-    echo "📦 Creating virtual environment..."
-    python3 -m venv venv
-    
-    echo "📥 Installing dependencies..."
-    source venv/bin/activate
-    pip install -r backend/requirements.txt
-else
-    echo "✓ Virtual environment found"
-    source venv/bin/activate
+    echo "No virtual environment found. Running initial setup first..."
+    ./setup.sh
 fi
 
-echo ""
-echo "🚀 Starting backend server..."
-echo "   Server will run on http://localhost:5001"
-echo ""
-echo "📝 To use the tool:"
-echo "   1. Open frontend/index.html in your web browser"
-echo "   2. Or run: open frontend/index.html (macOS)"
-echo ""
-echo "⌨️  Press Ctrl+C to stop the server"
-echo ""
-echo "----------------------------------------"
-echo ""
-
-# Start the backend
-cd backend
-python app.py
+exec ./run.sh
